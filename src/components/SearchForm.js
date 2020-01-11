@@ -1,7 +1,6 @@
 import React from 'react';
 
 const SearchForm = props => {
-    console.log(props)
     return (
         <form onSubmit={props.getLocation}>
             <div className="input-group p-2">

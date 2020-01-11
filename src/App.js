@@ -6,8 +6,7 @@ import CityWeather from './components/CityWeather';
 import CityNotfound from './components/CityNotFound';
 
 const API_KEY = '&appid=597183998af258a21fb04ea3b8b5b63f';
-//const API_BASE_URL = (location) => `http://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric${API_KEY}`
-const API_BASE_URL = (location) => `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&lang=es${API_KEY}`
+const API_BASE_URL = (location) => `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&lang=es${API_KEY}`
 class App extends React.Component {
   constructor() {
     super();
@@ -26,11 +25,9 @@ class App extends React.Component {
 
   getchWeatherNow = async event => {
     event.preventDefault();
-    console.log(event.target.elements.city.value);
     let city = event.target.elements.city.value;
     const weatherRequest = await fetch( API_BASE_URL(city) );
     const response = await weatherRequest.json();
-    console.log(response);
     if(response.cod === 200)
       this.setState({
         city : response.name,
@@ -54,7 +51,6 @@ class App extends React.Component {
   getchWeatherFive = async() => {
     const weatherRequest = await fetch( API_BASE_URL('Nueva Imperial') );
     const response = await weatherRequest.json();
-    console.log(response);
     this.setState({
       city : response.name,
       country : response.sys.country,

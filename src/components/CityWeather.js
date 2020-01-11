@@ -3,10 +3,8 @@ import React from 'react';
 
 const CityWeather = props => {
     const { weatherInfo } = props;
-
-    console.log('hola')
-    console.log(weatherInfo)
     const i = (iconhex) => `http://openweathermap.org/img/wn/${iconhex}@2x.png`
+    
     return (
         <div className="Box">
             <h3> {weatherInfo.city}, {weatherInfo.country}</h3>
