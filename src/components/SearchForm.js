@@ -1,11 +1,11 @@
 import React from 'react';
 
-export default function SearchForm(props){
-
+const SearchForm = props => {
+    console.log(props)
     return (
-        <form >
+        <form onSubmit={props.getLocation}>
             <div className="input-group mb-3 p-2">
-                <input type="text" name="city" className="form-control" placeholder="Ciudad" required/>
+                <input type="text" name="city" className="form-control" placeholder="Ciudad" autoComplete="off" required/>
                 <div className="input-group-append">
                     <button className="btn btn-outline-success font-weight-bold"
                     type="submit">
@@ -16,3 +16,4 @@ export default function SearchForm(props){
         </form>
     );
 }
+export default SearchForm;
