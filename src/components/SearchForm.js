@@ -4,10 +4,10 @@ const SearchForm = props => {
     console.log(props)
     return (
         <form onSubmit={props.getLocation}>
-            <div className="input-group mb-3 p-2">
+            <div className="input-group p-2">
                 <input type="text" name="city" className="form-control" placeholder="Ciudad" autoComplete="off" required/>
                 <div className="input-group-append">
-                    <button className="btn btn-outline-success font-weight-bold"
+                    <button className="btn btn-outline-dark font-weight-bold text-white"
                     type="submit">
                         Consultar clima
                     </button>

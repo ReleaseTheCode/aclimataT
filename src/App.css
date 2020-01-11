@@ -1,12 +1,17 @@
-/*
-.App {
-  text-align: center;
+.bg-black {
+  background-color: black;
 }
-*/
-.Box{
+.bg-night {
+  background-color: #20232a;
+}
+
+
+.App {
+  min-height: 100vh;
+}
+
+.Box {
   padding: 1rem;
-  border-width: .2rem;
-  border: solid #d4e0ec;
 }
 
 .App-logo {

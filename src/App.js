@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import SearchForm from './components/SearchForm';
 import CityWeather from './components/CityWeather';
+import CityNotfound from './components/CityNotFound';
 
 const API_KEY = '&appid=597183998af258a21fb04ea3b8b5b63f';
 //const API_BASE_URL = (location) => `http://api.openweathermap.org/data/2.5/forecast?q=${location}&units=metric${API_KEY}`
@@ -14,10 +15,12 @@ class App extends React.Component {
       city : false,
       country : '',
       temp : '',
+      feelsLike : '',
+      humidity : '',
       windSpeed : '',
       description : '',
-      humidity : '',
-      icon : ''
+      icon : '',
+      error : false
     };
   }
 
@@ -28,15 +31,24 @@ class App extends React.Component {
     const weatherRequest = await fetch( API_BASE_URL(city) );
     const response = await weatherRequest.json();
     console.log(response);
-    this.setState({
-      city : response.name,
-      country : response.sys.country,
-      temp : Math.round(response.main.temp),
-      windSpeed : Math.round(response.wind.speed * 3.6),
-      description : response.weather[0].description,
-      humidity : response.main.humidity,
-      icon : response.weather[0].icon,
-    });
+    if(response.cod === 200)
+      this.setState({
+        city : response.name,
+        country : response.sys.country,
+        temp : Math.round(response.main.temp),
+        feelsLike : Math.round(response.main.feels_like),
+        humidity : response.main.humidity,
+        windSpeed : Math.round(response.wind.speed * 3.6),
+        description : response.weather[0].description,
+        icon : response.weather[0].icon,
+        error : false
+      });
+    else
+      this.setState({
+        city : false,
+        error : true
+
+      });
   };
 
   getchWeatherFive = async() => {
@@ -53,10 +65,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="container">
-          <SearchForm getLocation={this.getchWeatherNow}/>
-          { this.state.city ? <CityWeather weatherInfo={this.state} /> : null }
+      <div className="App bg-black text-white">
+        <div className="TopBar bg-night py-2">
+          <div className="container">
+            <SearchForm getLocation={this.getchWeatherNow}/>
+          </div>
+        </div>
+        <div className="content py-2">
+          <div className="container">
+            { this.state.city ? <CityWeather weatherInfo={this.state} /> : null }
+            { this.state.error ? <CityNotfound /> : null }
+          </div>
         </div>
       </div>
     )
