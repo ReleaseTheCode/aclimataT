@@ -1,4 +1,4 @@
-# Search Github users and repos
+# Weather app
 
 Esta app-web permite de acuerdo a la ciudad ingresada, obtener las condiciones climáticas para dicha ciudad.
 
